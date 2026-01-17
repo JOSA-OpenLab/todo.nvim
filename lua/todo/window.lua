@@ -6,15 +6,18 @@ local M = {}
 ---@return { width: number, height: number, col: number, row: number }
 local function calculate_dimensions()
   local opts = config.get()
+  -- Use defaults if not configured yet
+  local cfg_width = opts.width or 0.8
+  local cfg_height = opts.height or 0.8
   local editor_width = vim.o.columns
   local editor_height = vim.o.lines
 
   -- Calculate width
   local width
-  if opts.width <= 1 then
-    width = math.floor(editor_width * opts.width)
+  if cfg_width <= 1 then
+    width = math.floor(editor_width * cfg_width)
   else
-    width = opts.width
+    width = cfg_width
   end
   if opts.max_width then
     width = math.min(width, opts.max_width)
@@ -22,10 +25,10 @@ local function calculate_dimensions()
 
   -- Calculate height
   local height
-  if opts.height <= 1 then
-    height = math.floor(editor_height * opts.height)
+  if cfg_height <= 1 then
+    height = math.floor(editor_height * cfg_height)
   else
-    height = opts.height
+    height = cfg_height
   end
   if opts.max_height then
     height = math.min(height, opts.max_height)
