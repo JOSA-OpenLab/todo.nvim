@@ -23,7 +23,7 @@ A simple Neovim plugin for managing todo files in a floating window.
 
 ```lua
 {
-  "yourusername/todo.nvim",
+  "JOSA-OpenLab/todo.nvim",
   cmd = { "Todo", "Td" },
   keys = {
     { "<leader>td", "<cmd>Todo<cr>", desc = "Toggle Todo" },
@@ -39,7 +39,7 @@ A simple Neovim plugin for managing todo files in a floating window.
 
 ```lua
 use {
-  "yourusername/todo.nvim",
+  "JOSA-OpenLab/todo.nvim",
   config = function()
     require("todo").setup({
       target_file = "todo.md",
@@ -52,7 +52,7 @@ use {
 ### Using [vim-plug](https://github.com/junegunn/vim-plug)
 
 ```vim
-Plug 'yourusername/todo.nvim'
+Plug 'JOSA-OpenLab/todo.nvim'
 
 lua << EOF
 require("todo").setup({
