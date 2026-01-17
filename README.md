@@ -2,8 +2,8 @@
 
 A simple Neovim plugin for managing todo files in a floating window.
 
-![Neovim](https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)
-![Lua](https://img.shields.io/badge/lua-%232C2D72.svg?style=for-the-badge&logo=lua&logoColor=white)
+![Neovim](https://img.shields.io/badge/NeoVim-000000?style=for-the-badge&logo=neovim&logoColor=white)
+![Lua](https://img.shields.io/badge/Lua-000000?style=for-the-badge&logo=lua&logoColor=white)
 
 ## Features
 
@@ -62,7 +62,7 @@ require("todo").setup({
 EOF
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 ```lua
 require("todo").setup({
