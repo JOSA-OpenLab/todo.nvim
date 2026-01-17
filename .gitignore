@@ -1,0 +1,11 @@
+# Neovim
+.netrwhist
+swapfile
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store

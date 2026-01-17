@@ -1,0 +1,177 @@
+*todo.nvim.txt*  A simple floating todo plugin for Neovim
+
+Author:   Your Name
+License:  MIT
+Version:  1.0.0
+
+==============================================================================
+CONTENTS                                                    *todo-nvim-contents*
+
+    1. Introduction ............................ |todo-nvim-introduction|
+    2. Requirements ............................ |todo-nvim-requirements|
+    3. Installation ............................ |todo-nvim-installation|
+    4. Configuration ........................... |todo-nvim-configuration|
+    5. Commands ................................ |todo-nvim-commands|
+    6. Keymaps ................................. |todo-nvim-keymaps|
+    7. API ..................................... |todo-nvim-api|
+    8. Health Check ............................ |todo-nvim-health|
+
+==============================================================================
+1. INTRODUCTION                                          *todo-nvim-introduction*
+
+todo.nvim is a simple Neovim plugin for managing todo files in a floating
+window. It provides a distraction-free environment for managing your tasks.
+
+Features:
+- Open todo files in a beautiful floating window
+- Auto-resizable window that maintains center position
+- Unsaved changes protection with auto-save on focus lost
+- Configurable keymaps
+- Smart file resolution (project-local or global)
+- Auto-creates todo file if it doesn't exist
+
+==============================================================================
+2. REQUIREMENTS                                          *todo-nvim-requirements*
+
+- Neovim >= 0.9.0
+
+==============================================================================
+3. INSTALLATION                                          *todo-nvim-installation*
+
+Using lazy.nvim: >lua
+    {
+      "yourusername/todo.nvim",
+      cmd = { "Todo", "Td" },
+      keys = {
+        { "<leader>td", "<cmd>Todo<cr>", desc = "Toggle Todo" },
+      },
+      opts = {
+        target_file = "todo.md",
+        global_file = "~/notes/todo.md",
+      },
+    }
+<
+
+Using packer.nvim: >lua
+    use {
+      "yourusername/todo.nvim",
+      config = function()
+        require("todo").setup({
+          target_file = "todo.md",
+          global_file = "~/notes/todo.md",
+        })
+      end,
+    }
+<
+
+==============================================================================
+4. CONFIGURATION                                        *todo-nvim-configuration*
+
+Call `require("todo").setup()` with an options table:
+
+>lua
+    require("todo").setup({
+      target_file = "todo.md",     -- Path to your todo file
+      global_file = "~/notes/todo.md", -- Fallback global file
+      width = 0.8,                 -- Window width (0-1 for %, >1 for cols)
+      height = 0.8,                -- Window height (0-1 for %, >1 for rows)
+      max_width = 80,              -- Maximum width (nil for no limit)
+      max_height = nil,            -- Maximum height (nil for no limit)
+      border = "rounded",          -- Border style
+      keymap = "<leader>td",       -- Keymap (false to disable)
+      command = "Todo",            -- Command name
+    })
+<
+
+                                                        *todo-nvim-config-options*
+Options:
+
+target_file (string)
+    Path to your todo file. Can be relative (resolved from git root) or
+    absolute. Default: "todo.md"
+
+global_file (string)
+    Fallback file when target_file doesn't exist. Default: "~/todo.md"
+
+width (number)
+    Window width. Values 0-1 are treated as percentage, >1 as columns.
+    Default: 0.8
+
+height (number)
+    Window height. Values 0-1 are treated as percentage, >1 as rows.
+    Default: 0.8
+
+max_width (number|nil)
+    Maximum window width in columns. nil for no limit. Default: 80
+
+max_height (number|nil)
+    Maximum window height in rows. nil for no limit. Default: nil
+
+border (string)
+    Border style. Options: "none", "single", "double", "rounded", "solid",
+    "shadow". Default: "rounded"
+
+keymap (string|false)
+    Keymap to toggle todo window. false to disable. Default: "<leader>td"
+
+command (string)
+    Command name to toggle todo window. Default: "Todo"
+
+==============================================================================
+5. COMMANDS                                                  *todo-nvim-commands*
+
+                                                                          *:Todo*
+:Todo                   Toggle the todo floating window.
+
+:Todo!                  Force close the todo window (ignores unsaved changes).
+
+                                                                            *:Td*
+:Td                     Alias for :Todo.
+
+==============================================================================
+6. KEYMAPS                                                    *todo-nvim-keymaps*
+
+Default keymaps set by the plugin:
+
+Normal mode:
+    <leader>td          Toggle todo window (configurable)
+
+Inside todo window:
+    q                   Close window (respects unsaved changes)
+    <Esc>               Close window (respects unsaved changes)
+
+==============================================================================
+7. API                                                            *todo-nvim-api*
+
+                                                               *todo.setup()*
+todo.setup({opts})
+    Initialize the plugin with the given options. See |todo-nvim-configuration|
+    for available options.
+
+                                                                *todo.open()*
+todo.open()
+    Open the todo file in a floating window. If already open, focuses the
+    existing window.
+
+                                                               *todo.close()*
+todo.close([force])
+    Close the todo window.
+    Parameters:
+        force (boolean, optional): If true, closes without checking for
+                                   unsaved changes.
+
+                                                              *todo.toggle()*
+todo.toggle()
+    Toggle the todo window open/closed.
+
+==============================================================================
+8. HEALTH CHECK                                                *todo-nvim-health*
+
+Run `:checkhealth todo` to verify your setup. The health check will verify:
+- Neovim version compatibility
+- Plugin loading status
+- Configuration validity
+- Todo file existence
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
